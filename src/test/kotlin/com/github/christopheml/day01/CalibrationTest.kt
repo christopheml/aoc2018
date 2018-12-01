@@ -7,14 +7,20 @@ internal class CalibrationTest {
 
     @Test
     internal fun one_change_up() {
-        val calibration = Calibration("+3")
+        val calibration = Calibration(listOf("+3"))
         assertThat(calibration.frequency()).isEqualTo(3)
     }
 
     @Test
     internal fun one_change_down() {
-        val calibration = Calibration("-9")
+        val calibration = Calibration(listOf("-9"))
         assertThat(calibration.frequency()).isEqualTo(-9)
+    }
+
+    @Test
+    internal fun multiple_changes() {
+        val calibration = Calibration(listOf("-3", "+6", "-7", "+9"))
+        assertThat(calibration.frequency()).isEqualTo(5)
     }
 
 }

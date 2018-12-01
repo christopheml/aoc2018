@@ -1,11 +1,11 @@
 package com.github.christopheml.day01
 
-class Calibration(frequencies: String) {
+class Calibration(textFrequencies: List<String>) {
 
-    private val frequency: Frequency = Frequency(frequencies)
+    private val frequencies: List<Frequency> = textFrequencies.map { f -> Frequency(f) }
 
     fun frequency(): Int {
-        return frequency.value
+        return frequencies.map { f -> f.value }.sum()
     }
 
 }
