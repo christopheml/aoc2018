@@ -11,4 +11,10 @@ internal class CalibrationTest {
         assertThat(calibration.frequency()).isEqualTo(3)
     }
 
+    @Test
+    internal fun one_change_down() {
+        val calibration = Calibration("-9")
+        assertThat(calibration.frequency()).isEqualTo(-9)
+    }
+
 }
