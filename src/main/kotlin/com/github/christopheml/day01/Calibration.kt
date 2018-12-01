@@ -1,17 +1,11 @@
 package com.github.christopheml.day01
 
-import java.lang.IllegalArgumentException
+class Calibration(frequencies: String) {
 
-class Calibration(private val frequencies: String) {
+    private val frequency: Frequency = Frequency(frequencies)
 
     fun frequency(): Int {
-        val sign = frequencies[0]
-        val value = frequencies.substring(1).toInt()
-        return when (sign) {
-            '+' ->  value
-            '-' -> -value
-            else -> throw IllegalArgumentException("Malformed frequency [$frequencies]")
-        }
+        return frequency.value
     }
 
 }
