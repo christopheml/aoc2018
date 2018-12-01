@@ -23,4 +23,22 @@ internal class CalibrationTest {
         assertThat(calibration.frequency()).isEqualTo(5)
     }
 
+    @Test
+    internal fun first_frequency_reached_twice_acceptance1() {
+        val calibration = Calibration(listOf("+3", "+3", "+4", "-2", "-4"))
+        assertThat(calibration.firstReachedTwiceFrequency()).isEqualTo(10)
+    }
+
+    @Test
+    internal fun first_frequency_reached_twice_acceptance2() {
+        val calibration = Calibration(listOf("-6", "+3", "+8", "+5", "-6"))
+        assertThat(calibration.firstReachedTwiceFrequency()).isEqualTo(5)
+    }
+
+    @Test
+    internal fun first_frequency_reached_twice_acceptance3() {
+        val calibration = Calibration(listOf("+7", "+7", "-2", "-7", "-4"))
+        assertThat(calibration.firstReachedTwiceFrequency()).isEqualTo(14)
+    }
+
 }
