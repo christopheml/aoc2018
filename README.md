@@ -20,3 +20,8 @@ that is not idiomatic to Kotlin in a lot of places.
 Overall language seems nice and very expressive. String interpolation is awesome, using `if` for ternaries is nice and 
 the `when` construct is great too.
 
+### Day 2
+
+Getting more comfortable with Kotlin features, the two most prominent being looping over ranges 
+(`for (j in i + 1 until words.size)`) and extra API on collections, that allow incredible expressivity over Java 
+(see [WordDifferences](src/main/kotlin/com/github/christopheml/day02/WordDifferences.kt)).
