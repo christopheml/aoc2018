@@ -3,18 +3,9 @@ package com.github.christopheml.day02
 internal class Checksum(private val words: List<String>) {
 
     fun calculate(): Int {
-        var sum2 = 0
-        var sum3 = 0
         val letterFilter = LetterFilter()
-
-        for (word in words) {
-            if (letterFilter.containsNOfAnyLetter(word, 2)) {
-                sum2++
-            }
-            if (letterFilter.containsNOfAnyLetter(word, 3)) {
-                sum3++
-            }
-        }
+        val sum2 = words.count { w -> letterFilter.containsNOfAnyLetter(w, 2) }
+        val sum3 = words.count { w -> letterFilter.containsNOfAnyLetter(w, 3) }
 
         return sum2 * sum3
     }
