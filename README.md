@@ -25,3 +25,9 @@ the `when` construct is great too.
 Getting more comfortable with Kotlin features, the two most prominent being looping over ranges 
 (`for (j in i + 1 until words.size)`) and extra API on collections, that allow incredible expressivity over Java 
 (see [WordDifferences](src/main/kotlin/com/github/christopheml/day02/WordDifferences.kt)).
+
+### Day 3
+
+This one required more Kotlin collection stuff and an extensive use of `Pair<A, B>`, even if that kind of structure is
+usually and indication you need a dedicated class for the job. I didn't really focus on efficiency, trying to get 
+readable code and reworking it only if performance seems to be an issue.

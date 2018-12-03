@@ -16,6 +16,12 @@ internal class Fabric {
         return claimed.count { entry -> entry.value.size > 1 }
     }
 
+    fun notOverlapping(): String {
+        val all = claimed.values.flatten().toSet()
+        val overlapping = claimed.values.filter { ids -> ids.size > 1 }.flatten().toSet()
+        return all.minus(overlapping).first()
+    }
+
 }
 
 fun main(args: Array<String>) {
@@ -26,6 +32,7 @@ fun main(args: Array<String>) {
     val fabric = Fabric()
     claims.forEach { fabric.claim(it) }
     println("Solution to first part is " + fabric.claimedTwice())
+    println("Solution to second part is " + fabric.notOverlapping())
 }
 
 internal fun toClaim(id: String, point: String, size: String): Claim {
