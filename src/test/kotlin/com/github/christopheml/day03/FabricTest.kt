@@ -8,9 +8,9 @@ internal class FabricTest {
     @Test
     internal fun acceptance_test() {
         val claims = listOf(
-            Claim(Pair(1, 3), Pair(4, 4)),
-            Claim(Pair(3, 1), Pair(4, 4)),
-            Claim(Pair(5, 5), Pair(2, 2))
+            Claim("#1", Pair(1, 3), Pair(4, 4)),
+            Claim("#2", Pair(3, 1), Pair(4, 4)),
+            Claim("#3", Pair(5, 5), Pair(2, 2))
         )
 
         val fabric = Fabric()

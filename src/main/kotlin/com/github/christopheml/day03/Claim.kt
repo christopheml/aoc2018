@@ -1,6 +1,6 @@
 package com.github.christopheml.day03
 
-internal class Claim(private val origin: Pair<Int, Int>, private val size: Pair<Int, Int>) {
+internal class Claim(internal val id: String, private val origin: Pair<Int, Int>, private val size: Pair<Int, Int>) {
 
     fun points(): List<Pair<Int, Int>> {
         val points = ArrayList<Pair<Int, Int>>()
