@@ -27,4 +27,8 @@ internal class Shifts(private val shifts: Collection<Shift>) {
             .toPair()
     }
 
+    fun guards(): Collection<Int> {
+        return shifts.map { it.id }.distinct()
+    }
+
 }

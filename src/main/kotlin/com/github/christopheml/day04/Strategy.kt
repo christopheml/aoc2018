@@ -7,7 +7,14 @@ fun main(args: Array<String>) {
     val shifts = Shifts(ShiftParser(input).parse())
 
     val mostAsleepGuard = shifts.mostAsleepGuard()
-    val solution = mostAsleepGuard * shifts.mostAsleepMinuteForGuard(mostAsleepGuard)
+    val solution = mostAsleepGuard * shifts.mostAsleepMinuteForGuard(mostAsleepGuard).first
 
     println("Solution to first part is $solution")
+
+    val (guard, mostAsleepMinute) = shifts.guards()
+        .associateBy({ it }, { shifts.mostAsleepMinuteForGuard(it) })
+        .maxBy { e -> e.value.second }!!
+
+    println("Solution to second part is " + guard * mostAsleepMinute.first)
+
 }
