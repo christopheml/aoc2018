@@ -2,7 +2,6 @@ package com.github.christopheml.day04
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 
 internal class ShiftParserTest {
 
@@ -31,8 +30,8 @@ internal class ShiftParserTest {
         val shifts = ShiftParser(log).parse()
         assertThat(shifts).hasSize(5)
 
-        assertThat(shifts[LocalDate.of(1518, 11, 1)]!!.minutesAsleep()).isEqualTo(45)
-        assertThat(shifts[LocalDate.of(1518, 11, 2)]!!.minutesAsleep()).isEqualTo(10)
+        assertThat(shifts[0].minutesAsleep()).isEqualTo(45)
+        assertThat(shifts[1].minutesAsleep()).isEqualTo(10)
     }
 
 }
