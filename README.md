@@ -31,3 +31,13 @@ Getting more comfortable with Kotlin features, the two most prominent being loop
 This one required more Kotlin collection stuff and an extensive use of `Pair<A, B>`, even if that kind of structure is
 usually and indication you need a dedicated class for the job. I didn't really focus on efficiency, trying to get 
 readable code and reworking it only if performance seems to be an issue.
+
+### Day 4
+
+First real difficult step of the 2018 calendar and the return of an all time favorite: input parsing!
+
+Everything that could go wrong here went wrong: I overengineered part of the logic and ended up with tons of useless
+complexity. To make things worse, my initial design wasn't flexible enough and I ran into a corner case that forced me
+into a ugly hack.
+
+This is definitely an implementation I need to rework when I get a clearer view of what idiomatic Kotlin is.
