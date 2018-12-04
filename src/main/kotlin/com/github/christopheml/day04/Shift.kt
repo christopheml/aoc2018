@@ -6,8 +6,8 @@ class Shift(val id: Int, private val shift: Array<Boolean>) {
         return shift.count { !it }
     }
 
-    fun asleepAtMinute(minute: Int): Boolean {
-        return shift[minute]
+    fun detailedMinutesAsleep(): Collection<Int> {
+        return shift.indices.filter { !shift[it] }
     }
 
 }
