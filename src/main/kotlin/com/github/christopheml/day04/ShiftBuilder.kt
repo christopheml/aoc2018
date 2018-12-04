@@ -1,10 +1,10 @@
 package com.github.christopheml.day04
 
-internal class ShiftBuilder {
+internal class ShiftBuilder(private val id: Int) {
 
-    var shift: Array<Boolean> = Array(60) { true }
-    var minute = 0
-    var asleep = false
+    private var shift: Array<Boolean> = Array(60) { true }
+    private var minute = 0
+    private var asleep = false
 
     fun wakesUp(wakeUpMinute: Int): ShiftBuilder {
         sleepUntil(wakeUpMinute)
@@ -30,7 +30,7 @@ internal class ShiftBuilder {
             // Guard is still sleeping at the end of the shift
             sleepUntil(60)
         }
-        return Shift(shift)
+        return Shift(id, shift)
     }
 
 }

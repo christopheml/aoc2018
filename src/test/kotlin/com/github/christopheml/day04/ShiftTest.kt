@@ -7,13 +7,13 @@ internal class ShiftTest {
 
     @Test
     internal fun fully_awake_shift() {
-        val shift = ShiftBuilder().build()
+        val shift = ShiftBuilder(9).build()
         assertThat(shift.minutesAsleep()).isEqualTo(0)
     }
 
     @Test
     internal fun fully_asleep_shift() {
-        val shift = ShiftBuilder()
+        val shift = ShiftBuilder(4)
             .sleeps(0)
             .build()
         assertThat(shift.minutesAsleep()).isEqualTo(60)
@@ -21,7 +21,7 @@ internal class ShiftTest {
 
     @Test
     internal fun simple_shift() {
-        val shift = ShiftBuilder()
+        val shift = ShiftBuilder(11)
             .sleeps(40)
             .wakesUp(50)
             .build()
@@ -30,7 +30,7 @@ internal class ShiftTest {
 
     @Test
     internal fun complex_shift() {
-        val shift = ShiftBuilder()
+        val shift = ShiftBuilder(90)
             .sleeps(5)
             .wakesUp(25)
             .sleeps(30)
