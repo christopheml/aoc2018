@@ -1,13 +1,13 @@
 package com.github.christopheml.day04
 
-class Shift(val id: Int, private val shift: Array<Boolean>) {
+class Shift(val id: Int, private val shift: Collection<Int>) {
 
-    fun minutesAsleep(): Int {
-        return shift.count { !it }
+    fun timeAsleep(): Int {
+        return shift.count()
     }
 
-    fun detailedMinutesAsleep(): Collection<Int> {
-        return shift.indices.filter { !shift[it] }
+    fun minutesAsleep(): Collection<Int> {
+        return shift
     }
 
 }

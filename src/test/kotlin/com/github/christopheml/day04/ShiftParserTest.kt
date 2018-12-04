@@ -30,8 +30,9 @@ internal class ShiftParserTest {
         val shifts = ShiftParser(log).parse()
         assertThat(shifts).hasSize(5)
 
-        assertThat(shifts[0].minutesAsleep()).isEqualTo(45)
-        assertThat(shifts[1].minutesAsleep()).isEqualTo(10)
+        assertThat(shifts[0].timeAsleep()).isEqualTo(45)
+        assertThat(shifts[1].timeAsleep()).isEqualTo(10)
+        assertThat(shifts[1].minutesAsleep()).containsExactly(40, 41, 42, 43, 44, 45, 46, 47, 48, 49)
     }
 
 }
