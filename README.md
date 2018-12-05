@@ -57,3 +57,16 @@ running for several minutes before spitting out a fortunately correct result.
 
 Taking time to really think about the problem in a more subtle way, I ended up with a stack-based implementation that
 runs at a satisfying speed. 
+
+Oh, and did I mention that [Kotlin Extensions](https://kotlinlang.org/docs/reference/extensions.html) are beautiful ?
+
+```java
+    private fun Char.xorCase(other: Char): Boolean {
+        return isLowerCase() && other.isUpperCase() || isUpperCase() && other.isLowerCase()
+    }
+    
+    // Checking if characters a and b have mixed case
+    if (a.xorCase(b)) {
+        // ...
+    }
+```
