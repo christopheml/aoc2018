@@ -5,8 +5,6 @@ import java.util.*
 
 internal class Polymer(private val chain: String) {
 
-    private val reductionRegex = generateRegex()
-
     private fun Char.xorCase(other: Char): Boolean {
         return isLowerCase() && other.isUpperCase() || isUpperCase() && other.isLowerCase()
     }
@@ -24,12 +22,6 @@ internal class Polymer(private val chain: String) {
             polymerized.push(c)
         }
         return polymerized.joinToString("").reversed()
-    }
-
-    private fun generateRegex(): Regex {
-        val leftToRight = "abcdefghijklmnopqrstuvwxyz".map { c -> c.toString() + c.toUpperCase() }
-        val rightToLeft = leftToRight.map { w -> w.reversed() }
-        return Regex((leftToRight + rightToLeft).joinToString("|"))
     }
 
 }
