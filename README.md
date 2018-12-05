@@ -2,6 +2,8 @@
 
 This year I decided to spice things up a bit and give Kotlin a try.
 
+:warning: **Spoilers ahead!**
+
 ## Progress log
 
 ### Project Setup
@@ -41,3 +43,17 @@ complexity. To make things worse, my initial design wasn't flexible enough and I
 into a ugly hack.
 
 This is definitely an implementation I need to rework when I get a clearer view of what idiomatic Kotlin is.
+
+### Day 5
+
+Back to a simple problem with another regular twist from advent of code: the performance issue in part 2. 
+
+I started with a very straightforward implementation with - hold your breath - a massive regular expression. 
+Since I was too lazy to write it by hand, I generated it and repeatedly removed the first match from the chain 
+until the chain didn't change in size, which was super efficient in developer time and super inefficient in cpu time.
+
+I was pretty sure that could hit me in the face for part 2 and sure enough I got slapped, with the implementation 
+running for several minutes before spitting out a fortunately correct result.
+
+Taking time to really think about the problem in a more subtle way, I ended up with a stack-based implementation that
+runs at a satisfying speed. 

@@ -1,21 +1,29 @@
 package com.github.christopheml.day05
 
 import com.github.christopheml.common.PuzzleInput
+import java.util.*
 
 internal class Polymer(private val chain: String) {
 
     private val reductionRegex = generateRegex()
 
+    private fun Char.xorCase(other: Char): Boolean {
+        return isLowerCase() && other.isUpperCase() || isUpperCase() && other.isLowerCase()
+    }
+
     fun react(): String {
-        var reduced = chain
-        var length: Int
-
-        do {
-            length = reduced.length
-            reduced = reduced.replaceFirst(reductionRegex, "")
-        } while (length != reduced.length)
-
-        return reduced
+        val polymerized = ArrayDeque<Char>(chain.length)
+        for (c in chain) {
+            if (polymerized.isNotEmpty()) {
+                val last = polymerized.peek()
+                if (last.xorCase(c) && last.equals(c, ignoreCase = true)) {
+                    polymerized.pop()
+                    continue
+                }
+            }
+            polymerized.push(c)
+        }
+        return polymerized.joinToString("").reversed()
     }
 
     private fun generateRegex(): Regex {
