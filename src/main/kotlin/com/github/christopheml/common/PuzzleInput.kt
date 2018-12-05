@@ -8,4 +8,8 @@ class PuzzleInput(private val filename: String) {
             .filter { s -> s.isNotBlank() }
     }
 
+    fun asString(): String {
+        return asList()[0]
+    }
+
 }
