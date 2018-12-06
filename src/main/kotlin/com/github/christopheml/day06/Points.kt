@@ -34,18 +34,20 @@ class Points(private val coordinates: Collection<Point>) {
         return areaSizes.values.max()!!
     }
 
-    private fun mapPointsToCoordinates(): Map<Point, Point> {
-        val areas = HashMap<Point, Point>()
+    private fun mapPointsToCoordinates(): Map<Point, Point?> {
+        return areaPoints()
+            .associateBy({ it }, { closestPointFrom(it) })
+            .filterValues { it != null }
+    }
 
-        for (x in enclosingArea.first.x until enclosingArea.second.x + 1) {
-            for (y in enclosingArea.first.y until enclosingArea.second.y + 1) {
-                val currentPoint = Point(x, y)
-                val closestPoint = closestPointFrom(currentPoint)
-                closestPoint?.let { areas[currentPoint] = it }
+    private fun areaPoints(): Sequence<Point> {
+        return iterator {
+            for (x in enclosingArea.first.x until enclosingArea.second.x + 1) {
+                for (y in enclosingArea.first.y until enclosingArea.second.y + 1) {
+                    yield(Point(x, y))
+                }
             }
-        }
-
-        return areas
+        }.asSequence()
     }
 
     private fun closestPointFrom(point: Point): Point? {

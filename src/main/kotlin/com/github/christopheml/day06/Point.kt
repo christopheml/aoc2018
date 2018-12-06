@@ -12,7 +12,7 @@ data class Point(val x: Int, val y: Int) {
             .minBy { e -> e.key }!!.value
     }
 
-    private fun distanceFrom(other: Point): Int {
+    fun distanceFrom(other: Point): Int {
         return Math.abs(x - other.x) + Math.abs(y - other.y)
     }
 
