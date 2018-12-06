@@ -3,7 +3,7 @@ package com.github.christopheml.day04
 import com.github.christopheml.common.PuzzleInput
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day04.txt").asList()
+    val input = PuzzleInput(4).asList()
     val shifts = Shifts(ShiftParser(input).parse())
 
     val mostAsleepGuard = shifts.mostAsleepGuard()

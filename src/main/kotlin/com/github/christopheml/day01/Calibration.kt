@@ -27,7 +27,7 @@ class Calibration(textFrequencies: List<String>) {
 }
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day01.txt").asList()
+    val input = PuzzleInput(1).asList()
     val calibration = Calibration(input)
     println("Solution for first part is " + calibration.frequency())
     println("Solution for second part is " + calibration.firstReachedTwiceFrequency())

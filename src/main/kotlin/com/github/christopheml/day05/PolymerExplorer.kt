@@ -20,7 +20,7 @@ class PolymerExplorer(private val chain: String) {
 }
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day05.txt").asString()
+    val input = PuzzleInput(5).asString()
     val minimumSize = PolymerExplorer(input).explore()
 
     println("Solution to the second part is $minimumSize.")

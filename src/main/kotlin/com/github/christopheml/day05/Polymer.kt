@@ -27,7 +27,7 @@ internal class Polymer(private val chain: String) {
 }
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day05.txt").asString()
+    val input = PuzzleInput(5).asString()
     val polymerized = Polymer(input).react()
 
     println("Solution to the first part is " + polymerized.length)

@@ -15,7 +15,7 @@ internal class Checksum(private val words: List<String>) {
 }
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day02.txt").asList()
+    val input = PuzzleInput(2).asList()
     val checksum = Checksum(input)
     println("Solution for first part is " + checksum.calculate())
 }

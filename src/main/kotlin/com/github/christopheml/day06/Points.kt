@@ -71,7 +71,7 @@ class Points(private val coordinates: Collection<Point>) {
 }
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day06.txt").asList()
+    val input = PuzzleInput(6).asList()
         .map { s -> s.split(", ") }
         .map { (x, y) -> Point(x.toInt(), y.toInt()) }
         .toList()

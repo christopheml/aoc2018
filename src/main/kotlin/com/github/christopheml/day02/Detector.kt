@@ -22,7 +22,7 @@ internal class Detector(private val words: List<String>) {
 }
 
 fun main(args: Array<String>) {
-    val input = PuzzleInput("day02.txt").asList()
+    val input = PuzzleInput(2).asList()
     val detector = Detector(input)
     println("Solution to second part is " + detector.find())
 }

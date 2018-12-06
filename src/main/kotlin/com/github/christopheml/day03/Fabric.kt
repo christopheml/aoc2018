@@ -26,7 +26,7 @@ internal class Fabric {
 
 fun main(args: Array<String>) {
     val splitter = Regex(" @ |: ")
-    val claims = PuzzleInput("day03.txt").asList()
+    val claims = PuzzleInput(3).asList()
         .map { s -> splitter.split(s) }
         .map { s -> toClaim(s[0], s[1], s[2]) }
     val fabric = Fabric()
