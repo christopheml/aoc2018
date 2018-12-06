@@ -18,18 +18,14 @@ class Points(private val coordinates: Collection<Point>) {
     fun biggestFiniteArea(): Int {
         val areas = mapPointsToCoordinates()
 
-        val pointsWithAreaTouchingEdge = areas
+        val touchingEdges = areas
             .filter { e -> isOnEdge(e.key) }
             .values.distinct()
-
-        val candidates = coordinates
-            .filter { p -> !isOnEdge(p) }
-            .filter { p -> !pointsWithAreaTouchingEdge.contains(p) }
 
         val areaSizes = areas.values
             .groupingBy { it }
             .eachCount()
-            .filter { e -> candidates.contains(e.key) }
+            .filterKeys { !touchingEdges.contains(it) }
 
         return areaSizes.values.max()!!
     }
