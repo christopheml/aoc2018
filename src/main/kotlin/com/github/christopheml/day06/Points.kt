@@ -40,6 +40,16 @@ class Points(private val coordinates: Collection<Point>) {
             .filterValues { it != null }
     }
 
+    fun closestRegion(): Collection<Point> {
+        return areaPoints()
+            .associateBy({ it }, { distanceFromAllCoordinates(it) })
+            .filterValues { it < 10000 }
+            .keys
+    }
+
+    private fun distanceFromAllCoordinates(point: Point) =
+        coordinates.map { point.distanceFrom(it) }.sum()
+
     private fun areaPoints(): Sequence<Point> {
         return iterator {
             for (x in enclosingArea.first.x until enclosingArea.second.x + 1) {
@@ -70,6 +80,8 @@ fun main(args: Array<String>) {
         .map { (x, y) -> Point(x.toInt(), y.toInt()) }
         .toList()
 
-    val result = Points(input).biggestFiniteArea()
-    println("Solution to the first part is $result")
+    val points = Points(input)
+
+    println("Solution to the first part is ${points.biggestFiniteArea()}")
+    println("Solution to the second part is ${points.closestRegion().size}")
 }
