@@ -1,6 +1,7 @@
 package com.github.christopheml.day07
 
 import com.github.christopheml.common.PuzzleInput
+import com.github.christopheml.day06.Elves
 
 class Prerequisites {
 
@@ -29,6 +30,33 @@ class Prerequisites {
         return done.joinToString("")
     }
 
+    fun runParallel(elfCount: Int, timeFunction: (Char) -> Int): Int {
+        val done = ArrayList<Char>()
+        var time = 0
+        val elves = Elves(elfCount)
+
+        do {
+            val availableSteps = prerequisites
+                .filterValues { v -> v.minus(done).isEmpty() }
+                .keys
+                .minus(done)
+                .minus(elves.assigned())
+                .sorted()
+
+            for (availableStep in availableSteps) {
+                if (elves.isAvailable()) {
+                    elves.assign(availableStep, timeFunction.invoke(availableStep))
+                }
+            }
+
+            time++
+            done.addAll(elves.tick().sorted())
+        } while (done.size < prerequisites.size)
+
+        return time
+    }
+
+
 }
 
 fun main(args: Array<String>) {
@@ -40,4 +68,8 @@ fun main(args: Array<String>) {
             )
         }
     println("Solution to the first part is: " + prerequisites.order())
+
+    val time = prerequisites.runParallel(5, timeFunction = { it - 'A' + 61 })
+
+    println("Solution to the second part is: $time")
 }
