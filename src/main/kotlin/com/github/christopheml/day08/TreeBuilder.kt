@@ -32,17 +32,12 @@ class TreeBuilder(input: Collection<Int>) {
 
 class Node(private val children: List<Node>, private val metadata: List<Int>) {
 
-    private fun <T> visit(valueFunction: (Node) -> T, mergeFunction: (List<T>) -> T): T {
-        val ownValue = valueFunction.invoke(this)
-        return if (children.isEmpty()) {
-            ownValue
-        } else {
-            mergeFunction.invoke(children.map { it.visit(valueFunction, mergeFunction) } + ownValue)
-        }
-    }
-
     fun sumOfAllMetadata(): Int {
-        return visit({ it.metadata.sum() }, { it.sum() })
+        return if (children.isEmpty()) {
+            metadata.sum()
+        } else {
+            metadata.sum() + children.map { it.sumOfAllMetadata() }.sum()
+        }
     }
 
     fun valueOf(): Int {
