@@ -11,6 +11,7 @@ internal class TreeBuilderTest {
         val treeBuilder = TreeBuilder(input)
         val tree = treeBuilder.build()
         assertThat(tree.sumOfAllMetadata()).isEqualTo(138)
+        assertThat(tree.valueOf()).isEqualTo(66)
     }
 
 }

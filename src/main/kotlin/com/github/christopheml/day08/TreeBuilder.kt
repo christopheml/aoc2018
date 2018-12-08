@@ -45,10 +45,23 @@ class Node(private val children: List<Node>, private val metadata: List<Int>) {
         return visit({ it.metadata.sum() }, { it.sum() })
     }
 
+    fun valueOf(): Int {
+        return if (children.isEmpty()) {
+            metadata.sum()
+        } else {
+            metadata.mapNotNull { child(it - 1) }.map { it.valueOf() }.sum()
+        }
+    }
+
+    private fun child(index: Int): Node? {
+        return if (index < children.size) children[index] else null
+    }
+
 }
 
 fun main(args: Array<String>) {
     val input = PuzzleInput(8).asString().splitToSequence(" ").map { it.toInt() }.toList()
     val tree = TreeBuilder(input).build()
     println("Solution to the first part is: " + tree.sumOfAllMetadata())
+    println("Solution to the second part is: " + tree.valueOf())
 }
