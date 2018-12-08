@@ -1,12 +1,14 @@
 package com.github.christopheml.day03
 
-internal class Claim(internal val id: String, private val origin: Pair<Int, Int>, private val size: Pair<Int, Int>) {
+import com.github.christopheml.common.Point
 
-    fun points(): Sequence<Pair<Int, Int>> {
+internal class Claim(internal val id: String, private val origin: Point, private val width: Int, private val height: Int) {
+
+    fun points(): Sequence<Point> {
         return iterator {
-            for (x in 0 until size.first) {
-                for (y in 0 until size.second) {
-                    yield(Pair(x + origin.first, y + origin.second))
+            for (x in 0 until width) {
+                for (y in 0 until height) {
+                    yield(Point(x + origin.x, y + origin.y))
                 }
             }
         }.asSequence()

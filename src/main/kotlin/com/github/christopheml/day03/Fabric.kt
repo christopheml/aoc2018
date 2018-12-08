@@ -1,10 +1,11 @@
 package com.github.christopheml.day03
 
+import com.github.christopheml.common.Point
 import com.github.christopheml.common.PuzzleInput
 
 internal class Fabric {
 
-    private val claimed: MutableMap<Pair<Int, Int>, MutableSet<String>> = HashMap()
+    private val claimed: MutableMap<Point, MutableSet<String>> = HashMap()
 
     fun claim(claim: Claim) {
         claim.points().forEach {
@@ -40,7 +41,8 @@ internal fun toClaim(id: String, point: String, size: String): Claim {
     val dimensions = size.split("x")
     return Claim(
         id,
-        Pair(coordinates[0].toInt(), coordinates[1].toInt()),
-        Pair(dimensions[0].toInt(), dimensions[1].toInt())
+        Point(coordinates[0].toInt(), coordinates[1].toInt()),
+        dimensions[0].toInt(),
+        dimensions[1].toInt()
     )
 }
