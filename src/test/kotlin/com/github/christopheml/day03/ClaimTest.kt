@@ -8,7 +8,7 @@ internal class ClaimTest {
     @Test
     internal fun points_generation() {
         val claim = Claim("#1", Pair(1, 1), Pair(2, 2))
-        assertThat(claim.points()).containsExactlyInAnyOrder(
+        assertThat(claim.points().toList()).containsExactlyInAnyOrder(
             Pair(1, 1),
             Pair(1, 2),
             Pair(2, 1),
