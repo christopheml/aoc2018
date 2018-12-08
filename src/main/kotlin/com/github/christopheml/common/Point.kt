@@ -1,4 +1,4 @@
-package com.github.christopheml.day06
+package com.github.christopheml.common
 
 data class Point(val x: Int, val y: Int) {
 
@@ -8,11 +8,11 @@ data class Point(val x: Int, val y: Int) {
 
     fun findClosest(others: Collection<Point>): Collection<Point> {
         return others
-            .groupBy { p -> distanceFrom(p) }
+            .groupBy { p -> manhattanDistanceFrom(p) }
             .minBy { e -> e.key }!!.value
     }
 
-    fun distanceFrom(other: Point): Int {
+    fun manhattanDistanceFrom(other: Point): Int {
         return Math.abs(x - other.x) + Math.abs(y - other.y)
     }
 

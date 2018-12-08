@@ -1,5 +1,6 @@
 package com.github.christopheml.day06
 
+import com.github.christopheml.common.Point
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

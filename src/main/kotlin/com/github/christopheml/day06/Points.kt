@@ -1,5 +1,6 @@
 package com.github.christopheml.day06
 
+import com.github.christopheml.common.Point
 import com.github.christopheml.common.PuzzleInput
 
 class Points(private val coordinates: Collection<Point>) {
@@ -44,7 +45,7 @@ class Points(private val coordinates: Collection<Point>) {
     }
 
     private fun distanceFromAllCoordinates(point: Point) =
-        coordinates.map { point.distanceFrom(it) }.sum()
+        coordinates.map { point.manhattanDistanceFrom(it) }.sum()
 
     private fun areaPoints(): Sequence<Point> {
         return iterator {
