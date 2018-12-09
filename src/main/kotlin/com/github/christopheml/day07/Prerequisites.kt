@@ -1,7 +1,6 @@
 package com.github.christopheml.day07
 
 import com.github.christopheml.common.PuzzleInput
-import com.github.christopheml.day06.Elves
 
 class Prerequisites {
 

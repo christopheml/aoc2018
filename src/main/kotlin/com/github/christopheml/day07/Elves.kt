@@ -1,6 +1,4 @@
-package com.github.christopheml.day06
-
-import java.lang.IllegalStateException
+package com.github.christopheml.day07
 
 class Elves(private val count: Int) {
 
