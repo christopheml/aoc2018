@@ -70,3 +70,39 @@ Oh, and did I mention that [Kotlin Extensions](https://kotlinlang.org/docs/refer
         // ...
     }
 ```
+
+### Day 6
+
+TBD
+
+### Day 7
+
+TBD
+
+### Day 8
+
+This one has been one of the easiest so far. I suspected that I could hack my way through part 1 but it would not work
+as well for part two so I build the tree and implementing tree traversal logic. I wrote a generic traversal function
+hoping that would help finding an instant answer for part 2, but YAGNI is an important development guideline for a reason
+and I couldn't use the generic function in the end. 
+
+I rewrote part 1 to get rid of it and make the code simpler.
+
+I also spent some time going back to previous days and improve existing implementations using my better knowledge of Kotlin. 
+
+### Day 9
+
+Operations on circular lists are another common subject in Advent of Code, and having solved several similar ones in
+previous editions, I should have known better. And I botched up my implementation.
+
+First thing that went wrong was the wording of the exercises, namely the end condition. Last marble being worth n points
+meant that you had to play for `n` turns, not to play until score for a given turn was `n`.
+
+Second thing that went wrong was not implementing a circular linked list right from the start. I struggled to no end to
+pinpoint the exact logic working with an indexed list and while I provided me with the right answer for part one, it 
+was way too slow for part 2. Plus the code was outright ugly, hard to understand with plenty of obscure calculations.
+
+I rewrote everything using a [CircularList](src/main/kotlin/com/github/christopheml/day09/CircularList.kt) and things 
+went super smoothly. Code was now super explicit and run speed was great.
+
+I blew something like 4 hours to get to an elegant and fast solution, a "feat" I'm not particularly proud of.
