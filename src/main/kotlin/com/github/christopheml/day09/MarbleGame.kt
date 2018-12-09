@@ -4,9 +4,9 @@ class MarbleGame(playerCount: Int) {
 
     private val marbles = Marbles()
 
-    private val scores = Array(playerCount) { 0 }
+    private val scores = Array<Long>(playerCount) { 0 }
 
-    fun playUntil(lastMarbleScore: Int): Array<Int> {
+    fun playUntil(lastMarbleScore: Int): Array<Long> {
         for (turn in 0 until lastMarbleScore) {
             scores[turn % scores.size] += marbles.play()
         }

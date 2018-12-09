@@ -36,7 +36,7 @@ internal class MarblesTest {
             "0 16 8 17 4 18 19 2 24 20 (25) 10 21 5 22 11 1 12 6 13 3 14 7 15"
         )
 
-        val marbles = Marbles(13)
+        val marbles = Marbles()
         for (i in 0 until expected.size) {
             assertThat(marbles.representation()).isEqualTo(expected[i]).`as`("Turn $i")
             marbles.play()
