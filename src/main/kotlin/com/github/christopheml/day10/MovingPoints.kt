@@ -2,6 +2,7 @@ package com.github.christopheml.day10
 
 import com.github.christopheml.common.Point
 import com.github.christopheml.common.PuzzleInput
+import com.github.christopheml.common.boundaries
 
 class MovingPoints(private val movingPoints: Collection<MovingPoint>) {
 
@@ -27,16 +28,19 @@ class MovingPoints(private val movingPoints: Collection<MovingPoint>) {
     }
 
     private fun getHeight(points: Iterable<Point>): Int {
-        val heightCoordinates = points.map { it.y }.distinct().toList()
-        return heightCoordinates.max()!! - heightCoordinates.min()!! + 1
+        val (minY, maxY) = boundaries(points.map{ it.y })
+        return maxY - minY
     }
 
     fun representationAfter(seconds: Int): String {
         val finalPosition = pointsAfter(seconds)
         val characters = ArrayList<Char>()
 
-        for (y in finalPosition.map { it.y }.min()!! .. finalPosition.map { it.y }.max()!!) {
-            for (x in finalPosition.map { it.x }.min()!! .. finalPosition.map { it.x }.max()!!) {
+        val (minX, maxX) = boundaries(finalPosition.map{ it.x })
+        val (minY, maxY) = boundaries(finalPosition.map{ it.y })
+
+        for (y in minY .. maxY) {
+            for (x in minX .. maxX) {
                 if (finalPosition.count { it.x == x && it.y == y } > 0) {
                     characters.add('#')
                 } else {
