@@ -1,37 +1,43 @@
 package com.github.christopheml.day10
 
+import com.github.christopheml.common.Point
 import com.github.christopheml.common.PuzzleInput
 
-class MovingPoints(private val points: Collection<MovingPoint>) {
+class MovingPoints(private val movingPoints: Collection<MovingPoint>) {
 
-    fun move() {
-        points.forEach { it.move() }
+    private fun pointsAfter(seconds: Int): Collection<Point> {
+        return movingPoints.map { it.positionAfter(seconds) }
     }
 
-    fun detectVerticalLines(threshold: Int): Int {
-        return points
-            .map { it.x }
-            .groupingBy { it }
-            .eachCount()
-            .filterValues { it >= threshold }
-            .count()
+    fun timeForMinimumHeight(): Int {
+        var previousHeight = Int.MAX_VALUE
+        var secondsElapsed = 0
+        while (true) {
+            // Loop is guaranteed to stop because a solution exists
+            val height = getHeight(pointsAfter(secondsElapsed))
+
+            if (height > previousHeight) {
+                // Height is increasing again so we must have hit the minimum in the previous second
+                return secondsElapsed - 1
+            }
+
+            previousHeight = height
+            secondsElapsed++
+        }
     }
 
-    fun height(): Int {
-        return points.map { it.y }.max()!! - points.map { it.y }.min()!! + 1
+    private fun getHeight(points: Iterable<Point>): Int {
+        val heightCoordinates = points.map { it.y }.distinct().toList()
+        return heightCoordinates.max()!! - heightCoordinates.min()!! + 1
     }
 
-    fun render(): String {
-        val minX = points.map { it.x }.min()!!
-        val minY = points.map { it.y }.min()!!
-        val maxX = points.map { it.x }.max()!!
-        val maxY = points.map { it.y }.max()!!
-
+    fun representationAfter(seconds: Int): String {
+        val finalPosition = pointsAfter(seconds)
         val characters = ArrayList<Char>()
 
-        for (y in minY..maxY) {
-            for (x in minX..maxX) {
-                if (points.count { it.x == x && it.y == y } > 0) {
+        for (y in finalPosition.map { it.y }.min()!! .. finalPosition.map { it.y }.max()!!) {
+            for (x in finalPosition.map { it.x }.min()!! .. finalPosition.map { it.x }.max()!!) {
+                if (finalPosition.count { it.x == x && it.y == y } > 0) {
                     characters.add('#')
                 } else {
                     characters.add(' ')
@@ -39,6 +45,7 @@ class MovingPoints(private val points: Collection<MovingPoint>) {
             }
             characters.add('\n')
         }
+
         return characters.joinToString("")
     }
 
@@ -47,18 +54,12 @@ class MovingPoints(private val points: Collection<MovingPoint>) {
 fun main(args: Array<String>) {
     val movingPoints = build(PuzzleInput(10).asList())
 
-    var height = 0
-    var iteration = 0
+    val messageTime = movingPoints.timeForMinimumHeight()
+    val message = movingPoints.representationAfter(messageTime)
 
-    while (height != 10) {
-        movingPoints.move()
-        iteration++
-        height = movingPoints.height()
-    }
+    println(message)
 
-    print(movingPoints.render())
-    println("Verticality is " + movingPoints.detectVerticalLines(10))
-    println("Message appeared after iteration $iteration")
+    println("Message appeared after $messageTime seconds")
 }
 
 fun build(input: List<String>): MovingPoints {

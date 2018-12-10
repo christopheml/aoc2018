@@ -1,10 +1,11 @@
 package com.github.christopheml.day10
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 internal class MovingPointsTest {
 
-    val testInput = listOf(
+    private val testInput = listOf(
         "position=< 9,  1> velocity=< 0,  2>",
         "position=< 7,  0> velocity=<-1,  0>",
         "position=< 3, -2> velocity=<-1,  1>",
@@ -39,16 +40,22 @@ internal class MovingPointsTest {
     )
 
     @Test
-    internal fun name() {
-
+    internal fun acceptance_test() {
         val movingPoints = build(testInput)
-        for (i in 0 until 10) {
-            println("Iteration $i")
-            println(" ================ Verticality => " + movingPoints.height())
-            println(movingPoints.render())
-            movingPoints.move()
-        }
+        val messageTime = movingPoints.timeForMinimumHeight()
+        val message = movingPoints.representationAfter(messageTime)
 
+        assertThat(messageTime).isEqualTo(3)
+        assertThat(message).isEqualTo(
+            "#   #  ###\n" +
+            "#   #   # \n" +
+            "#   #   # \n" +
+            "#####   # \n" +
+            "#   #   # \n" +
+            "#   #   # \n" +
+            "#   #   # \n" +
+            "#   #  ###\n"
+        )
     }
 
 }
