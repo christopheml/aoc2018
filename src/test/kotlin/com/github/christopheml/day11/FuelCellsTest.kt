@@ -1,6 +1,5 @@
 package com.github.christopheml.day11
 
-import com.github.christopheml.common.Point
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -16,8 +15,14 @@ internal class FuelCellsTest {
 
     @Test
     internal fun highest_location_acceptance_test() {
-        assertThat(FuelCells(18).locateHighestChargedCell(3)).isEqualTo(Point(33, 45))
-        assertThat(FuelCells(42).locateHighestChargedCell(3)).isEqualTo(Point(21, 61))
+        assertThat(FuelCells(18).locateHighestChargedCell(3)).isEqualTo(Triple(33, 45, 29))
+        assertThat(FuelCells(42).locateHighestChargedCell(3)).isEqualTo(Triple(21, 61, 30))
+    }
+
+    @Test
+    internal fun highest_location_any_size_acceptance_test() {
+        assertThat(FuelCells(18).locateHighestChargedCellOfAnySize()).isEqualTo(Triple(90, 269, 16))
+        assertThat(FuelCells(42).locateHighestChargedCellOfAnySize()).isEqualTo(Triple(232, 251, 12))
     }
 
 }
