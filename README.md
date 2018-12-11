@@ -129,3 +129,5 @@ is also a global maximum and is the solution I seek
 
 With this simple optimization, execution completes in a timely manner. I thought about cell value memoization, tried it,
 then scrapped it because it was not improving performance in any significant way.
+
+I also added a [visual view of values on the grid](visualizations/day11.png), because why not?

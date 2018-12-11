@@ -1,5 +1,7 @@
 package com.github.christopheml.day11
 
+import java.io.File
+
 class FuelCells(private val serialNumber: Int) {
 
     fun valueAt(x: Int, y: Int): Int {
@@ -59,4 +61,7 @@ fun main(args: Array<String>) {
 
     val (x, y, size) = fuelCells.locateHighestChargedCellOfAnySize()
     println("Solution to the second part is $x,$y,$size")
+
+    val output = File("visualizations/day11.png")
+    Heatmap().draw(fuelCells, output)
 }
