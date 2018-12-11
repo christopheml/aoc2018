@@ -106,3 +106,26 @@ I rewrote everything using a [CircularList](src/main/kotlin/com/github/christoph
 went super smoothly. Code was now super explicit and run speed was great.
 
 I blew something like 4 hours to get to an elegant and fast solution, a "feat" I'm not particularly proud of.
+
+### Day 10
+
+TBD
+
+### Day 11
+
+This one involved grid calculations. As always, it's useful to ask yourself if materializing the grid is a good idea
+or not. I decided to have the simplest implementation and have a function calculating the value at a given coordinate,
+then iterate from here if needed.
+
+Turned out that is was not necessary to materialize the grid at all and first part was quite straightforward.
+
+I expected that the second part would make us explore a larger solution space and some optimization would be needed. And
+it was right. Not satisfied with quite inelegant code, I ran it against acceptance tests and discovered two things:
+
+* Execution was indeed slow, with only a few hypotheses tested every second
+
+* Power values of cell grids seemed to peak and then dip lower forever, which means that the first local maximum I find 
+is also a global maximum and is the solution I seek
+
+With this simple optimization, execution completes in a timely manner. I thought about cell value memoization, tried it,
+then scrapped it because it was not improving performance in any significant way.
