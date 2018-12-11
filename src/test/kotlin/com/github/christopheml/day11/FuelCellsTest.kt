@@ -16,8 +16,8 @@ internal class FuelCellsTest {
 
     @Test
     internal fun highest_location_acceptance_test() {
-        assertThat(FuelCells(18).locateHighestChargedCell()).isEqualTo(Point(33, 45))
-        assertThat(FuelCells(42).locateHighestChargedCell()).isEqualTo(Point(21, 61))
+        assertThat(FuelCells(18).locateHighestChargedCell(3)).isEqualTo(Point(33, 45))
+        assertThat(FuelCells(42).locateHighestChargedCell(3)).isEqualTo(Point(21, 61))
     }
 
 }

@@ -11,15 +11,12 @@ class FuelCells(private val serialNumber: Int) {
         return digit - 5
     }
 
-    fun locateHighestChargedCell(): Point {
+    fun locateHighestChargedCell(squareSize: Int): Point {
         var highestValue = 0
         var location = Point(0 ,0)
-        for (x in 1 .. 297) {
-            for (y in 1 .. 297) {
-                val currentValue =
-                    valueAt(x, y) + valueAt(x + 1, y) + valueAt(x + 2, y) +
-                            valueAt(x, y + 1) + valueAt(x + 1, y + 1) + valueAt(x + 2, y + 1) +
-                            valueAt(x, y + 2) + valueAt(x + 1, y + 2) + valueAt(x + 2, y + 2)
+        for (x in 1 .. 300 - squareSize) {
+            for (y in 1 .. 300 - squareSize) {
+                val currentValue = getCellTotalPower(x, y, squareSize)
                 if (currentValue > highestValue) {
                     highestValue = currentValue
                     location = Point(x, y)
@@ -30,9 +27,19 @@ class FuelCells(private val serialNumber: Int) {
         return location
     }
 
+    private fun getCellTotalPower(x: Int, y: Int, squareSize: Int): Int {
+        var totalPower = 0
+        for (xOffset in 0 until squareSize) {
+            for (yOffset in 0 until squareSize) {
+                totalPower += valueAt(x + xOffset, y + yOffset)
+            }
+        }
+        return totalPower
+    }
+
 }
 
 fun main(args: Array<String>) {
-    val (x, y) = FuelCells(5177).locateHighestChargedCell()
+    val (x, y) = FuelCells(5177).locateHighestChargedCell(3)
     println("Solution to the first part is $x,$y")
 }
