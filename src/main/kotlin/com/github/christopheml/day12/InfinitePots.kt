@@ -14,12 +14,12 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
     fun generation() {
         expandIfNecessary()
 
-        val survivors = pots.mapIndexed { index, _ ->
+        val newPlants = pots.mapIndexed { index, _ ->
             if (patterns.any { matches(index, it.matcher) }) index else null
         }.filterNotNull().toSet()
 
         pots.indices.forEach {
-            if (survivors.contains(it)) {
+            if (newPlants.contains(it)) {
                 pots[it] = PotContent.PLANT
             } else {
                 pots[it] = PotContent.EMPTY
@@ -29,8 +29,8 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
 
     fun computeResult(): Int {
         return pots
-            .mapIndexed { index, potContent -> if (potContent == PotContent.PLANT) index else 0 }
-            .filter { it > 0 }
+            .mapIndexed { index, potContent -> if (potContent == PotContent.PLANT) index else null }
+            .filterNotNull()
             .map { toPotNumber(it) }
             .sum()
     }
