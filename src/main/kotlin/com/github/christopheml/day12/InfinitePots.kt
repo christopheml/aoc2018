@@ -5,7 +5,7 @@ import java.util.*
 
 class InfinitePots(initialState: String, textPatterns: List<String>) {
 
-    private val pots: MutableList<PotContent> = ArrayList<PotContent>(toPotContents(initialState))
+    private val pots: MutableList<PotContent> = ArrayList(toPotContents(initialState))
 
     private val patterns = parsePatterns(textPatterns)
 
@@ -91,7 +91,7 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
 fun main(args: Array<String>) {
     val input = PuzzleInput(12).asList()
     val initial = input[0]
-    val textPatterns = input.subList(1, input.size - 1)
+    val textPatterns = input.subList(1, input.size)
 
     val pots = InfinitePots(initial, textPatterns)
 
