@@ -60,7 +60,7 @@ runs at a satisfying speed.
 
 Oh, and did I mention that [Kotlin Extensions](https://kotlinlang.org/docs/reference/extensions.html) are beautiful ?
 
-```java
+```kotlin
     private fun Char.xorCase(other: Char): Boolean {
         return isLowerCase() && other.isUpperCase() || isUpperCase() && other.isLowerCase()
     }
@@ -131,3 +131,31 @@ With this simple optimization, execution completes in a timely manner. I thought
 then scrapped it because it was not improving performance in any significant way.
 
 I also added a [visual view of values on the grid](visualizations/day11.png), because why not?
+
+### Day 12
+
+I had my fair share of sweat and headaches for this one. I threw away two complete implementations because they were
+garbage, and made so many mistakes everywhere for the next. Off-by-one errors by the dozen, padding errors, etc. The 
+worst thing was several errors went under the radar as my acceptance test passed and I had no other reference to test
+against. I used someone else's solution to make sure I didn't have buggy input data and compare outputs to see where
+I screwed up.
+
+Part 2 was as messy as part 1, with the same errors. I need some sleep...
+
+The only thing I find pretty in my implementation is the final padding logic, with a lot of syntactic sugar:
+
+```kotlin
+    private fun expandIfNecessary() {
+        val padding = PotContent.EMPTY.times(3)
+
+        while (!pots.startsWith(padding)) {
+            expandLeft()
+        }
+
+        while (!pots.endsWith(padding)) {
+            expandRight()
+        }
+    }
+```
+
+Being able to extend `List` types with methods like `startsWith` or `endsWith` is really great for readability.
