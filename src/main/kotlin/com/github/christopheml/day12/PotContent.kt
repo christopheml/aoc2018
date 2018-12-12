@@ -9,4 +9,9 @@ enum class PotContent {
     };
 
     abstract fun toChar(): Char
+
+    fun times(n: Int): List<PotContent> {
+        return List(n) { this }
+    }
+
 }

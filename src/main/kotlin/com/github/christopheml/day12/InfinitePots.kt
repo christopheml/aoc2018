@@ -11,18 +11,29 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
 
     private var offset = 0
 
+    private fun <T: Any>List<T>.startsWith(other: List<T>): Boolean {
+        return other.indices.all { this[it] == other[it] }
+    }
+
+    private fun <T: Any>List<T>.endsWith(other: List<T>): Boolean {
+        return other.indices.all { this[size - other.size + it] == other[it] }
+    }
+
     fun generation() {
         expandIfNecessary()
 
-        val newPlants = pots.mapIndexed { index, _ ->
-            if (patterns.any { matches(index, it.matcher) }) index else null
-        }.filterNotNull().toSet()
+        val potsWithPlants = HashSet<Int>()
+        for (i in 2 until pots.size - 2) {
+            val slice = pots.subList(i - 2, i + 3)
+            if (patterns.contains(slice)) {
+                potsWithPlants.add(i)
+            }
+        }
 
         pots.indices.forEach {
-            if (newPlants.contains(it)) {
-                pots[it] = PotContent.PLANT
-            } else {
-                pots[it] = PotContent.EMPTY
+            pots[it] = when {
+                potsWithPlants.contains(it) -> PotContent.PLANT
+                else -> PotContent.EMPTY
             }
         }
     }
@@ -40,16 +51,13 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
     }
 
     private fun expandIfNecessary() {
-        if (pots[0] == PotContent.PLANT) {
-            expandLeft()
-            expandLeft()
-        } else if (pots[0] == PotContent.EMPTY && pots[1] == PotContent.PLANT) {
+        val padding = PotContent.EMPTY.times(3)
+
+        while (!pots.startsWith(padding)) {
             expandLeft()
         }
-        if (pots[pots.size - 1] == PotContent.PLANT) {
-            expandRight()
-            expandRight()
-        } else if (pots[pots.size - 1] == PotContent.EMPTY && pots[pots.size - 2] == PotContent.PLANT) {
+
+        while (!pots.endsWith(padding)) {
             expandRight()
         }
     }
@@ -67,19 +75,11 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
         return pots.map { it.toChar() }.joinToString("")
     }
 
-    private fun parsePatterns(textPatterns: List<String>): List<PotPattern> {
+    private fun parsePatterns(textPatterns: List<String>): Set<List<PotContent>> {
         return textPatterns
             .filter { s -> s.endsWith('#') }
-            .map {
-                PotPattern(
-                    toPotContents(it.substring(0, 5)),
-                    toPotContent(it.last())
-                )
-            }
-    }
-
-    private fun matches(start: Int, matcher: List<PotContent>): Boolean {
-        return IntRange(0, 4).all { pots.getOrNull(start + it - 2) ?: PotContent.EMPTY == matcher[it] }
+            .map { toPotContents(it.substring(0, 5)) }
+            .toSet()
     }
 
     private fun toPotContents(text: String): List<PotContent> = text.map { toPotContent(it) }
@@ -90,7 +90,7 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
 
 fun main(args: Array<String>) {
     val input = PuzzleInput(12).asList()
-    val initial = input[0]
+    val initial = input[0].removePrefix("initial state: ")
     val textPatterns = input.subList(1, input.size)
 
     val pots = InfinitePots(initial, textPatterns)

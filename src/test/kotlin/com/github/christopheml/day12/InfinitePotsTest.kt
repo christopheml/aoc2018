@@ -28,7 +28,6 @@ internal class InfinitePotsTest {
 
         for (i in 1..20) {
             pots.generation()
-            println(pots.render())
         }
 
         assertThat(pots.render()).contains(".#....##....#####...#######....#.#..##.")
