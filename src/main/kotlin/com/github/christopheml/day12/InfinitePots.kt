@@ -71,6 +71,10 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
         pots.add(PotContent.EMPTY)
     }
 
+    fun fingerprint(): Int {
+        return pots.subList(pots.indexOfFirst { it == PotContent.PLANT }, pots.indexOfLast { it == PotContent.PLANT } + 1).hashCode()
+    }
+
     fun render(): String {
         return pots.map { it.toChar() }.joinToString("")
     }
@@ -95,9 +99,38 @@ fun main(args: Array<String>) {
 
     val pots = InfinitePots(initial, textPatterns)
 
+    var generation = 0L
+
     for (i in 1..20) {
         pots.generation()
+        generation++
     }
 
-    println("Solution for first part is " + pots.computeResult())
+    val part1Result = pots.computeResult()
+
+    val seen = HashSet<Int>()
+    var part2Result = 0L
+
+    var sum = 0
+    var delta = 0
+    do {
+        pots.generation()
+        val fingerprint = pots.fingerprint()
+
+        if (seen.contains(fingerprint)) {
+            delta = pots.computeResult() - sum
+            part2Result = pots.computeResult().toLong()
+            println("Cycle detected at generation $generation, delta is $delta, base value is $part2Result")
+            break
+        }
+        seen.add(fingerprint)
+        sum = pots.computeResult()
+        generation++
+    } while (generation < 50000000000)
+
+    val remainingIterations = 50000000000 - generation - 1
+    part2Result += remainingIterations * delta
+
+    println("Solution for first part is $part1Result")
+    println("Solution for second part is $part2Result")
 }
