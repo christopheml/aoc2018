@@ -1,13 +1,10 @@
 package com.github.christopheml.day05
 
+import com.github.christophem.common.xorCase
 import com.github.christopheml.common.PuzzleInput
 import java.util.*
 
 internal class Polymer(private val chain: String) {
-
-    private fun Char.xorCase(other: Char): Boolean {
-        return isLowerCase() && other.isUpperCase() || isUpperCase() && other.isLowerCase()
-    }
 
     fun react(): String {
         val polymerized = ArrayDeque<Char>(chain.length)

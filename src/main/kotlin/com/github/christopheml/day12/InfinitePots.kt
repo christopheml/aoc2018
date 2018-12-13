@@ -1,5 +1,7 @@
 package com.github.christopheml.day12
 
+import com.github.christophem.common.endsWith
+import com.github.christophem.common.startsWith
 import com.github.christopheml.common.PuzzleInput
 import java.util.*
 
@@ -10,14 +12,6 @@ class InfinitePots(initialState: String, textPatterns: List<String>) {
     private val patterns = parsePatterns(textPatterns)
 
     private var offset = 0
-
-    private fun <T: Any>List<T>.startsWith(other: List<T>): Boolean {
-        return other.indices.all { this[it] == other[it] }
-    }
-
-    private fun <T: Any>List<T>.endsWith(other: List<T>): Boolean {
-        return other.indices.all { this[size - other.size + it] == other[it] }
-    }
 
     fun generation() {
         expandIfNecessary()
