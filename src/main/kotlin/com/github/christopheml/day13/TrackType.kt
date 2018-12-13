@@ -2,11 +2,14 @@ package com.github.christopheml.day13
 
 enum class TrackType {
     VERTICAL, HORIZONTAL, CORNER_SLASH, CORNER_BACKSLASH, INTERSECTION, NO_TRACK;
-}
 
+    fun isVertical(): Boolean {
+        return this == VERTICAL || this == INTERSECTION
+    }
 
-fun isValidTrack(c: Char): Boolean {
-    return """|v^-<>/\+""".contains(c)
+    fun isHorizontal(): Boolean {
+        return this == HORIZONTAL || this == INTERSECTION
+    }
 }
 
 fun toTrackType(c: Char): TrackType {
@@ -19,4 +22,3 @@ fun toTrackType(c: Char): TrackType {
         else -> TrackType.NO_TRACK
     }
 }
-

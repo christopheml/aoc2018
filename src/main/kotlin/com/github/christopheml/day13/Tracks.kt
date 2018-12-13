@@ -1,6 +1,7 @@
 package com.github.christopheml.day13
 
 import com.github.christopheml.common.Point
+import com.github.christopheml.common.PuzzleInput
 import java.util.*
 
 class Tracks(input: List<String>) {
@@ -9,8 +10,20 @@ class Tracks(input: List<String>) {
 
     private val tracks = createTracks()
 
+    private val carts = ArrayList<Cart>()
+
     init {
         linkTracks()
+    }
+
+    fun simulate(): Point {
+        do {
+            carts.forEach { it.move() }
+            val collisions = carts.map { it.position }.groupingBy { it }.eachCount().filter { it.value == 2 }
+            if (collisions.isNotEmpty()) {
+                return collisions.keys.first().position
+            }
+        } while (true)
     }
 
     private fun readGrid(x: Int, y: Int): Char {
@@ -19,12 +32,16 @@ class Tracks(input: List<String>) {
 
     private fun linkTracks() {
         tracks.forEach {
-            val top = toTrackType(readGrid(it.position.y - 1, it.position.x))
-            val bottom = toTrackType(readGrid(it.position.y + 1, it.position.x))
-            val left = toTrackType(readGrid(it.position.y, it.position.x - 1))
-            val right = toTrackType(readGrid(it.position.y, it.position.x + 1))
 
-            println("Link ${it.type} in position ${it.position}")
+            val current = readGrid(it.position.x, it.position.y)
+            if ("><v^".contains(current)) {
+                carts.add(Cart(current, it))
+            }
+
+            val top = toTrackType(readGrid(it.position.x, it.position.y - 1))
+            val bottom = toTrackType(readGrid(it.position.x, it.position.y + 1))
+            val left = toTrackType(readGrid(it.position.x - 1, it.position.y))
+            val right = toTrackType(readGrid(it.position.x + 1, it.position.y))
 
             if (it.type == TrackType.HORIZONTAL) {
                 linkHorizontal(it)
@@ -34,18 +51,18 @@ class Tracks(input: List<String>) {
                 linkHorizontal(it)
                 linkVertical(it)
             } else if (it.type == TrackType.CORNER_SLASH) {
-                if (top == TrackType.VERTICAL && left == TrackType.HORIZONTAL) {
+                if (top.isVertical() && left.isHorizontal()) {
                     linkTop(it)
                     linkLeft(it)
-                } else if (bottom == TrackType.VERTICAL && right == TrackType.HORIZONTAL) {
+                } else if (bottom.isVertical() && right.isHorizontal()) {
                     linkBottom(it)
                     linkRight(it)
                 }
             } else if (it.type == TrackType.CORNER_BACKSLASH) {
-                if (top == TrackType.VERTICAL && right == TrackType.HORIZONTAL) {
+                if (top.isVertical() && right.isHorizontal()) {
                     linkTop(it)
                     linkRight(it)
-                } else if (bottom == TrackType.VERTICAL && left == TrackType.HORIZONTAL) {
+                } else if (bottom.isVertical() && left.isHorizontal()) {
                     linkBottom(it)
                     linkLeft(it)
                 }
@@ -96,4 +113,10 @@ class Tracks(input: List<String>) {
         return tracks
     }
 
+}
+
+fun main(args: Array<String>) {
+    val tracks = Tracks(PuzzleInput(13).asList())
+    val (x, y) = tracks.simulate()
+    println("Solution to the first part is $x,$y")
 }

@@ -6,7 +6,7 @@ internal class TracksTest {
 
     @Test
     internal fun name() {
-        Tracks(
+        val (x, y) = Tracks(
             listOf(
                 """/->-\        """,
                 """|   |  /----\""",
@@ -15,6 +15,7 @@ internal class TracksTest {
                 """\-+-/  \-+--/""",
                 """  \------/     """
             )
-        )
+        ).simulate()
+        println("Crash at $x,$y")
     }
 }

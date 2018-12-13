@@ -12,5 +12,12 @@ class Track(val type: TrackType, val position: Point) {
         connections[direction] = other
     }
 
-}
+    fun directions(): Set<Direction> {
+        return connections.keys
+    }
 
+    fun next(direction: Direction): Track {
+        return connections[direction]!!
+    }
+
+}
