@@ -26,6 +26,19 @@ class Tracks(input: List<String>) {
         } while (true)
     }
 
+    fun highlander(): Point {
+        do {
+            carts.forEach { it.move() }
+            val crashed = carts
+                .groupBy { it.position }
+                .filterValues { it.size > 1 }
+                .values
+                .flatten()
+            carts.removeAll(crashed)
+        } while (carts.size > 1)
+        return carts.first().position.position
+    }
+
     private fun readGrid(x: Int, y: Int): Char {
         return trackGrid.getOrNull(y)?.getOrNull(x) ?: ' '
     }
@@ -116,6 +129,17 @@ class Tracks(input: List<String>) {
 }
 
 fun main(args: Array<String>) {
+    part1()
+    part2()
+}
+
+private fun part2() {
+    val tracks = Tracks(PuzzleInput(13).asList())
+    val (x, y) = tracks.highlander()
+    println("Solution to the second part is $x,$y")
+}
+
+private fun part1() {
     val tracks = Tracks(PuzzleInput(13).asList())
     val (x, y) = tracks.simulate()
     println("Solution to the first part is $x,$y")
