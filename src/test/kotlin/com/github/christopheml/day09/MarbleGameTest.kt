@@ -24,7 +24,7 @@ internal class MarbleGameTest {
 
     @ParameterizedTest
     @MethodSource("test_cases")
-    internal fun reactions(playerCount: Int, lastMarbleScore: Int, expectedHighScore: Int) {
+    internal fun reactions(playerCount: Int, lastMarbleScore: Int, expectedHighScore: Long) {
         val game = MarbleGame(playerCount)
         val scores = game.playUntil(lastMarbleScore)
         assertThat(scores.max()!!).isEqualTo(expectedHighScore)
