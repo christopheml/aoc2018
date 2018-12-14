@@ -1,6 +1,16 @@
 package com.github.christopheml.common
 
-data class Point(val x: Int, val y: Int) {
+data class Point(val x: Int, val y: Int) : Comparable<Point> {
+
+    override fun compareTo(other: Point): Int {
+        val ownDistance = manhattanDistanceFrom(ORIGIN)
+        val otherDistance = other.manhattanDistanceFrom(ORIGIN)
+        return when {
+            ownDistance < otherDistance -> -1
+            ownDistance > otherDistance -> 1
+            else -> 0
+        }
+    }
 
     fun isOnSameLine(other: Point): Boolean {
         return x == other.x || y == other.y
@@ -17,3 +27,5 @@ data class Point(val x: Int, val y: Int) {
     }
 
 }
+
+private val ORIGIN = Point(0, 0)

@@ -28,13 +28,21 @@ class Tracks(input: List<String>) {
 
     fun highlander(): Point {
         do {
-            carts.forEach { it.move() }
-            val crashed = carts
-                .groupBy { it.position }
-                .filterValues { it.size > 1 }
-                .values
-                .flatten()
+            carts.sortWith(compareBy { it.position.position })
+
+            val crashed = HashSet<Cart>()
+            for (cart in carts) {
+                if (!crashed.contains(cart)) {
+                    cart.move()
+                }
+                crashed.addAll(carts
+                    .groupBy { it.position }
+                    .filterValues { it.size > 1 }
+                    .values
+                    .flatten())
+            }
             carts.removeAll(crashed)
+            crashed.clear()
         } while (carts.size > 1)
         return carts.first().position.position
     }
