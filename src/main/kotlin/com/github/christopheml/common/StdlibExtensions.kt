@@ -1,4 +1,4 @@
-package com.github.christophem.common
+package com.github.christopheml.common
 
 fun Char.xorCase(other: Char): Boolean {
     return isLowerCase() && other.isUpperCase() || isUpperCase() && other.isLowerCase()

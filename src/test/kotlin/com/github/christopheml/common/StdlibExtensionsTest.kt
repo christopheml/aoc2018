@@ -1,7 +1,5 @@
 package com.github.christopheml.common
 
-import com.github.christophem.common.containsList
-import com.github.christophem.common.indexOfList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

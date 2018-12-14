@@ -1,8 +1,8 @@
 package com.github.christopheml.day12
 
-import com.github.christophem.common.endsWith
-import com.github.christophem.common.startsWith
 import com.github.christopheml.common.PuzzleInput
+import com.github.christopheml.common.endsWith
+import com.github.christopheml.common.startsWith
 import java.util.*
 
 class InfinitePots(initialState: String, textPatterns: List<String>) {

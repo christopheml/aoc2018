@@ -1,7 +1,7 @@
 package com.github.christopheml.day05
 
-import com.github.christophem.common.xorCase
 import com.github.christopheml.common.PuzzleInput
+import com.github.christopheml.common.xorCase
 import java.util.*
 
 internal class Polymer(private val chain: String) {

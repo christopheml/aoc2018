@@ -1,6 +1,6 @@
 package com.github.christopheml.day14
 
-import com.github.christophem.common.indexOfList
+import com.github.christopheml.common.indexOfList
 
 class RecipeMaker(initial: List<Int>) {
 
