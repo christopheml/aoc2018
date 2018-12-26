@@ -6,6 +6,11 @@ This year I decided to spice things up a bit and give Kotlin a try.
 
 ## Progress log
 
+I went on a hiatus midway because problems became way too complicated for the time I could spend on them. I felt like I
+hit a wall going into day 15, so I didn't try to work on it. This intuition was confirmed by the jump in time spent for
+developers in the global leaderboard (best time for day 15 was around 36 minutes, which is 3x to 10x what was needed for
+previous days)
+
 ### Project Setup
 
 I created the project using the Maven archetype `kotlin-archetype-jvm` from IntelliJ. Needed to update the Kotlin IDE
@@ -159,3 +164,20 @@ The only thing I find pretty in my implementation is the final padding logic, wi
 ```
 
 Being able to extend `List` types with methods like `startsWith` or `endsWith` is really great for readability.
+
+### Day 13
+
+TDB
+
+### Day 14 
+
+TDB
+
+### Day 25
+
+I went back to AOC after the hiatus to see if some problems were back to a scale I could afford. The final day has a
+part one that is quite easy to do, but requires a bit of thinking to get the algorithm as simple as can be. It was 
+refreshing to once again have something that doesn't requires complicated boilerplate.
+
+The second part is locked behind a count of 49 stars, which means I need to complete every previous day, and it's not
+likely to happen soon.
